@@ -26,7 +26,7 @@ class UI {
         <td>${book.author}</td>
         <td>${book.isbn}</td>
         <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
-      `;
+        `;
 
         list.appendChild(row);
     };
@@ -123,7 +123,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     // Validate
     if (title === '' || author === '' || isbn === '') {
         UI.showAlert('Please fill in all fields', 'danger');
-    } 
+    }
     else {
         // Instatiate book
         const book = new Book(title, author, isbn);
@@ -158,4 +158,8 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
 document.querySelector('#search-bar').addEventListener('keyup', () => {
     // Search book from store
     Store.searchBook();
+});
+
+angular.module('myApp', []).controller('myController', function($scope) {
+    $scope.books = Store.getBooks();
 });
