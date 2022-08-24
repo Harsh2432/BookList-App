@@ -9,6 +9,7 @@
     <meta name="keywords" content="BookList, App, HTML, JavaScript">
     <meta name="author" content="Harsh Jadhav">
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://kit.fontawesome.com/435cebf5e2.js" crossorigin="anonymous"></script>
     <title>MyBookListApp</title>
 </head>
@@ -34,21 +35,33 @@
             <input type="submit" value="Add Book" class="btn btn-primary btn-block">
         </form>
         <br>
-        <form class="d-flex">
-            <input id="search-bar" class="form-control me-sm-2" type="text" placeholder="Search">
-            <div id="search-btn" class="btn btn-primary my-2 my-sm-0 w-25">Search</div>
-        </form>
-        <table class="table table-striped mt-5">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>ISBN#</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="book-list"></tbody>
-        </table>
+        <h1 class="display-6 text-center">
+            Search Using Angular
+        </h1>
+        <div ng-app="myApp" ng-controller="myController">
+            <div class="d-flex">
+                <input id="search-bar" class="form-control me-sm-2" type="text" placeholder="Search" ng-model="search">
+                <div id="search-btn" class="btn btn-primary my-2 my-sm-0 w-25">Search</div>
+            </div>
+            <table class="table table-striped mt-5">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN#</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="book-list">
+                    <tr ng-repeat="book in books | filter: search">
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.isbn}}</td>
+                        <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="main.js"></script>
